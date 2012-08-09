@@ -22,7 +22,10 @@ Background: movies have been added to database
   And I am on the RottenPotatoes home page
 
 Scenario: sort movies alphabetically
+  Given I check the following ratings: G, PG, R, PG-13
+  And I press "ratings_submit"
   When I follow "Movie Title"
+  Then I should see "Aladdin" before "Amelie"
   # your steps here
 
 Scenario: sort movies in increasing order of release date
