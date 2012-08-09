@@ -14,9 +14,9 @@ end
 #   on the same page
 
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
-  page.body =~ /<td>#{e1}<\/td>/
-  page.body =~ /<td>#{e2}<\/td>/
-  assert e1 < e2
+  i = page.body =~ /<td>#{e1}<\/td>/
+  j = page.body =~ /<td>#{e2}<\/td>/
+  assert i < j
 end
 
 # Make it easier to express checking or unchecking several boxes at once
