@@ -24,7 +24,18 @@ end
 #  "When I check the following ratings: G"
 
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
+  rating_list = rating_list.split(/[, ]+/)
+  if uncheck
+    verb = "uncheck"
+  else
+    verb = "check"
+  end
+  rating_list.each {|rating| step %Q{I #{verb} "ratings_#{rating}"}}
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
+end
+
+Then /^(?:|I )should see all of the movies$/ do
+  flunk "Unimplemented"
 end
