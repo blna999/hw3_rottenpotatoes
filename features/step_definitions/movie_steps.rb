@@ -6,7 +6,7 @@ Given /the following movies exist/ do |movies_table|
   end
   movies_table.hashes.each do |movie|
     x = Movie.find_by_title(movie["title"])
-    assert x != nil and x.rating == movie["rating"] and x.release_date == movie["release_date"]
+    assert x != nil and x.rating == movie["rating"] and x.release_date == movie["release_date"] and x.director == movie["director"]
   end
 end
 
@@ -35,4 +35,9 @@ end
 
 Then /^(?:|I )should see all of the movies$/ do
   assert page.all('table#movies tbody tr').count == Movie.all.count
+end
+
+Then /the director of "(.*)" should be "(.*)"/ do |title, director|
+  x = Movie.find_by_title(title)
+  assert x != nil and x.director == director
 end
