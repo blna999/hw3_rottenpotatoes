@@ -25,4 +25,38 @@ describe MoviesController do
       assigns(:movies).should == fake_results
     end
   end
+
+  describe 'show movies' do
+    it 'should call the model method that select the movie' do
+      Movie.should_receive(:find).with('3')
+      post :show, {:id => '3'}
+    end
+  end
+
+  describe 'edit movies' do
+    it 'should call the model method that select the movie' do
+      Movie.should_receive(:find).with('3')
+      post :edit, {:id => '3'}
+    end
+  end
+
+  describe 'update movies' do
+    it 'should call the model method that select the movie' do
+      fake_movie = mock('Movie', :title => 'Star Wars')
+      fake_movie.stub(:update_attributes!)
+      Movie.stub(:find).and_return(fake_movie)
+      Movie.should_receive(:find).with('3')
+      post :update, {:id => '3'}
+    end
+  end
+
+  describe 'destroy movies' do
+    it 'should call the model method that select the movie' do
+      fake_movie = mock('Movie', :title => 'Star Wars')
+      fake_movie.stub(:destroy)
+      Movie.stub(:find).and_return(fake_movie)
+      Movie.should_receive(:find).with('3')
+      post :destroy, {:id => '3'}
+    end
+  end
 end
